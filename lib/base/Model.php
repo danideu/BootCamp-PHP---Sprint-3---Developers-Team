@@ -4,22 +4,14 @@
  */
 class Model
 {
-	protected $_dbh = null;
-	protected $_table = "";
-
-	// file_get_contents(http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascript/to-do.json)
 	
 	public function __construct()
 	{
 		// $uri = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$json = "todo.json";
-		// echo "<br>" . "URI: " . $uri . "javascript/" . $json . "<br>";
 		header('Content-type:text/html;charset=utf-8');
 		$tareas_json = json_decode(file_get_contents("http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascript/mio.json", true));
 		print_r($tareas_json, true);
-		// $tareas_json = json_decode(file_get_contents($uri, true));
-		// var_dump($tareas_json);
-		
 		$this->init($tareas_json);
 	}
 	
