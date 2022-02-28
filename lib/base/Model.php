@@ -1,5 +1,4 @@
 <?php
-
 /**
  * A base model for handling the database connections
  */
@@ -7,42 +6,48 @@ class Model
 {
 	protected $_dbh = null;
 	protected $_table = "";
+
+	// file_get_contents(http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascript/to-do.json)
 	
 	public function __construct()
 	{
-		// parses the settings file
-		$settings = parse_ini_file(ROOT_PATH . '/config/settings.ini', true);
+		// $uri = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$json = "todo.json";
+		// echo "<br>" . "URI: " . $uri . "javascript/" . $json . "<br>";
+		header('Content-type:text/html;charset=utf-8');
+		$tareas_json = json_decode(file_get_contents("http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascript/mio.json", true));
+		print_r($tareas_json, true);
+		// $tareas_json = json_decode(file_get_contents($uri, true));
+		// var_dump($tareas_json);
 		
-		// starts the connection to the database
-		$this->_dbh = new PDO(
-			sprintf(
-				"%s:host=%s;dbname=%s",
-				$settings['database']['driver'],
-				$settings['database']['host'],
-				$settings['database']['dbname']
-			),
-			$settings['database']['user'],
-			$settings['database']['password'],
-			array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-		);
-		
-		$this->init();
+		$this->init($tareas_json);
 	}
 	
-	public function init()
+	public function init($json)
 	{
-		
+		echo "Json Tareas: <br>";
+		var_dump($json);
 	}
 	
-	/**
-	 * Sets the database table the model is using
-	 * @param string $table the table the model is using
-	 */
-	protected function _setTable($table)
-	{
-		$this->_table = $table;
+	public function listAllTask(){
+		echo 'Listar todas las tarea';
 	}
-	
+
+	public function deleteTask($task){
+		$this->task = $task;
+		echo 'Eliminar tarea' . $this->task;
+	}
+
+	public function updateTask($task){
+		$this->task = $task;
+		echo 'Actualziar tarea' . $this->task;
+	}
+
+	public function completeTask($task){
+		$this->task = $task;
+		echo 'Completar tarea' . $this->task;
+	}
+
 	public function fetchOne($id)
 	{
 		$sql = 'select * from ' . $this->_table;
