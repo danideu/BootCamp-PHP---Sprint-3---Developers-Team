@@ -19,7 +19,6 @@ class Router
 			
 			// tries to find a simple route
 			$routeFound = $this->_getSimpleRoute($routes, $controller, $action);
-			
 			if (!$routeFound) {
 				// tries to find the a matching "parameter route"
 				$routeFound = $this->_getParameterRoute($routes, $controller, $action);
@@ -61,7 +60,7 @@ class Router
 		$uri = explode('?',$_SERVER['REQUEST_URI']);
 		$uri = $uri[0];
 		$uri = substr($uri, strlen(WEB_ROOT));
-		
+
 		return $uri;
 	}
 	
@@ -76,7 +75,7 @@ class Router
 	{
 		// fetches the URI
 		$uri = $this->_getUri();
-		
+
 		// if the route isn't defined, try to add a trailing slash
 		if (isset($routes[$uri])) {
 			$routeFound = $routes[$uri];
@@ -89,7 +88,7 @@ class Router
 			// fetches the current route
 			$routeFound = isset($routes[$uri]) ? $routes[$uri] : false;
 		}
-		
+
 		// if a matching route was found
 		if ($routeFound) {
 			list($name, $action) = explode('#', $routeFound);
