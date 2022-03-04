@@ -4,25 +4,20 @@
  */
 class Model
 {
-	
+	private $json = "todo.json";
+	private $tareas_json = null;
+
 	public function __construct()
 	{
 		// $uri = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		$json = "todo.json";
-		header('Content-type:text/html;charset=utf-8');
-		$tareas_json = json_decode(file_get_contents("http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascript/mio.json", true));
-		print_r($tareas_json, true);
-		$this->init($tareas_json);
+		$this->tareas_json = json_decode(file_get_contents("http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascripts/todo.json", true), true);
+		$this->listAllTask($this->tareas_json);
 	}
 	
-	public function init($json)
-	{
-		echo "Json Tareas: <br>";
-		var_dump($json);
-	}
-	
-	public function listAllTask(){
+	public function listAllTask($json){
 		echo 'Listar todas las tarea';
+		var_dump($json);
+		return($json);
 	}
 
 	public function deleteTask($task){
