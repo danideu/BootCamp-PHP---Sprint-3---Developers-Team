@@ -9,8 +9,11 @@
  * '/' => 'index#index',
  * '/calendar' => 'calendar#index'
  */
-$routes = array(
-	'/test' => 'test#index',
+$routes = array(	
 	'/login' => 'login#index',
-	'/alllist' => 'alllist#index'
+	'/task' => 'task#index',
+	'/createtask' => 'task#createTask',
+	'/deletetask' => 'task#deleteTask',
+	'/updatetask' => 'task#updateTask',
+	'/showtask' => 'task#showTask'
 );

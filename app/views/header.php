@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 //<link rel="stylesheet" href="http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/stylesheets/styles.css"> 
 //http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/login
@@ -63,3 +64,17 @@
 			</ul>
 		</nav>
 	</header>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
+    <link rel="stylesheet" href="../web/stylesheets/style.css">
+</head>
+<body>
+>>>>>>> c849f8c75e263f3748b38d2fd733e5480d35bf04
