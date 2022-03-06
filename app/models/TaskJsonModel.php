@@ -2,11 +2,10 @@
 
 class TaskJsonModel{
     private $json = "todo.json";
-    private $tareas_json = null;
+    //private $tareas_json = null;
 
     public function __construct()
-    {        
-        $this->tareas_json = json_decode(file_get_contents(ROOT_PATH . "/lib/db/json/todoTask.json", true), true);                
+    {  
     }
 
     public function saveTask($task): void{
@@ -14,8 +13,11 @@ class TaskJsonModel{
         var_dump($task);        
     }
 
-    public function listAllTask() {        
-        return $this->tareas_json;
+    public function listAllTask() {    
+        // Abrimos nuestro fichero json        
+        $tareas_json = file_get_contents(ROOT_PATH . "/lib/db/json/todoTask.json", true);                   
+        // Decodificamos el json
+        return json_decode($tareas_json, true);         
     }
 
     public function deleteTask($task){

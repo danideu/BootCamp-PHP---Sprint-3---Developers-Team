@@ -33,7 +33,7 @@ class View
 	{
 		// starts the output buffer
 		ob_start();
-		
+		//var_dump($viewScript);
 		// includes the view script
 		include(ROOT_PATH . '/app/views/scripts/' . $viewScript);
 		

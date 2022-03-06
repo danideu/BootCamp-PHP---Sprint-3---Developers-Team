@@ -31,15 +31,12 @@ class TaskController extends ApplicationController
         echo  __FILE__ . " ".  __FUNCTION__;
     }
 
-    public function showTaskAction() {        
-       $taskJsonModel = new TaskJsonModel();
-       $taskJsonModel->listAllTask();
-
-       /*
-       // Devuelve el valor de la vista
-       $this->_getAllParams();
-       */
-
+    public function showTaskAction() {      
+       //Declaramos un objeto de tipo Model  
+       $taskJsonModel = new TaskJsonModel();       
+       
+       // Pasamos los parametros del controller a la vista 
+       $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
     public function changeStateTaskAction() {

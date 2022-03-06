@@ -24,26 +24,27 @@ include(ROOT_PATH . '/app/views/header.php');
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800 text-gray-700 dark:text-gray-400">
-<?php 
-echo 'Desde la vista';
- echo '<pre>';
- print_r($this);       
- echo '</pre>'; 
+<?php  
+ //Recogemos el valor del controller accediendo al array data de la clase view
+ $allTask = $this->_data['showtask'];
+
+ // Recorremos todas las tareas
+ foreach($allTask as $task=>$value) {      
 ?>
                 <!-- Inicio - Task -->
                 <tr class="">
                   <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
                           <div>
-                              <p class="font-semibold">P. BUG1 </p>
-                              <p class="text-xs text-gray-600 dark:text-gray-400">Solucionar el error con el que la usuaria Sonia no está teniendo acceso a contenido aunque haya pagado</p>
+                              <p class="font-semibold"><?= $value['titulo'] ?> </p>
+                              <p class="text-xs text-gray-600 dark:text-gray-400"><?= $value['descripcion'] ?> </p>
                           </div>
                       </div>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-lime-300 bg-lime-600 dark:text-white dark:bg-purple-600">Completado</span>
+                    <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-lime-300 bg-lime-600 dark:text-white dark:bg-purple-600"><?= $value['estado'] ?> </span>
                   </td>
-                  <td class="px-4 py-3"><span class="text-sm">3/2/2020</span></td>
+                  <td class="px-4 py-3"><span class="text-sm"><?= $value['fec_creacion'] ?> </span></td>
                   <td class="px-4 py-3">
                     <a href="updatetask" style="display: inline-block">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,7 +63,8 @@ echo 'Desde la vista';
                     </svg></a>
                   </td>                  
               </tr>
-              <!-- Fin - Task -->
+              <?php } ?>
+              <!-- Fin - Task -->              
                 </tbody>
             </table>
         </div>
