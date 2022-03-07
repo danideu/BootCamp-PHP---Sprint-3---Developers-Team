@@ -29,6 +29,14 @@ class TaskController extends ApplicationController
 
     public function updateTaskAction() {
         echo  __FILE__ . " ".  __FUNCTION__;
+        //Declaramos un objeto de tipo Model  
+        $taskJsonModel = new TaskJsonModel();   
+        // Pasamos los parametros del controller a la vista 
+        $users = $taskJsonModel->listAllTask();
+        $user = $taskJsonModel->updateTask($users);
+        var_dump($user);
+
+        // $this->view->updatetask
     }
 
     public function showTaskAction() {      

@@ -27,7 +27,7 @@ include(ROOT_PATH . '/app/views/header.php');
 <?php  
  //Recogemos el valor del controller accediendo al array data de la clase view
  $allTask = $this->_data['showtask'];
-
+//  var_dump($allTask);
  // Recorremos todas las tareas
  foreach($allTask as $task=>$value) {      
 ?>
@@ -46,7 +46,8 @@ include(ROOT_PATH . '/app/views/header.php');
                   </td>
                   <td class="px-4 py-3"><span class="text-sm"><?= $value['fec_creacion'] ?> </span></td>
                   <td class="px-4 py-3">
-                    <a href="updatetask" style="display: inline-block">
+                    <!-- Editar Tarea -->
+                    <a href="updatetask?<?= "idTarea" . "=". $value['idTareas'] ?>" style="display: inline-block">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                       </svg>

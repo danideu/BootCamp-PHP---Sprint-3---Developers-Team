@@ -27,6 +27,7 @@ class TaskJsonModel{
 
     public function updateTask($task){
         $this->task = $task;
+        var_dump($this->task);
         echo 'Actualziar tarea' . $this->task;
     }
 
