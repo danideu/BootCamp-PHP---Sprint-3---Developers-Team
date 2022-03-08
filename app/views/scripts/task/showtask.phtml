@@ -27,7 +27,7 @@ include(ROOT_PATH . '/app/views/header.php');
 <?php  
  //Recogemos el valor del controller accediendo al array data de la clase view
  $allTask = $this->_data['showtask'];
-//  var_dump($allTask);
+
  // Recorremos todas las tareas
  foreach($allTask as $task=>$value) {      
 ?>
@@ -54,7 +54,7 @@ include(ROOT_PATH . '/app/views/header.php');
                     </a>
                   </td>
                   <td class="px-4 py-3">
-                    <a href="updatetask" style="display: inline-block">
+                    <a href="showtask?op=changestatus&<?= "idTarea" . "=". $value['idTareas'] ?>" style="display: inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
