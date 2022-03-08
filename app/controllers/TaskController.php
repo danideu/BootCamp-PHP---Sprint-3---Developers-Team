@@ -46,7 +46,10 @@ class TaskController extends ApplicationController
         echo "<br>UpdateTaskAction<br>";
         $id = $_GET['idTarea'];
         $user = $this->getTask($id);
-        $this->view->updatetask = $user;
+        // var_dump($user);
+        $this->view->updatetask = $user ;
+        // $action == 'update' ? 'Actualizamos el registro' : $this->view->updatetask = $user ;
+        
     }
 
     public function changestatus(){
@@ -64,17 +67,43 @@ class TaskController extends ApplicationController
 
        //Chequeamos si es cambio de estado
        if (isset($_GET['op'])){ 
-           $option = $_GET['op'];
-           if ($option == 'changestatus'){
-                $id = $_GET['idTarea'];
-                $user = $this->getTask($id);
-                $taskJsonModel = new TaskJsonModel();       
-                $allUsers = $taskJsonModel->listAllTask();
-                $taskJsonModel->changeStatusTask($allUsers, $user);
+           
+            $option = $_GET['op'];
+            $id = $_GET['idTarea'];
+
+            switch ($option){
+                case "changestatus":
+                    $user = $this->getTask($id);
+                    $taskJsonModel = new TaskJsonModel();       
+                    $allUsers = $taskJsonModel->listAllTask();
+                    $taskJsonModel->changeStatusTask($allUsers, $user);
+                    break;
+                case "update":
+                    $titulo = $_GET['titulo'];
+                    $descripcion = $_GET['descripcion'];
+                    //Enviamos a la página del Listado
+                    echo '<h1>Actualizamos el registro</h1>';
+                    echo 'Título: ' . $titulo . '<br>';
+                    echo 'Descripción: ' . $descripcion . '<br>';
+                    //Actualizamos registro según los datos obtenidos
+                    $user = $this->getTask($id);
+                    $taskJsonModel = new TaskJsonModel(); 
+                    $allUsers = $taskJsonModel->listAllTask();
+                    $taskJsonModel->updateTask($allUsers, $user);                    
+                    break;
+                default:
+                    echo "Este valor no corresponde a ninguna acción";
             }
-       }
-       // Pasamos los parametros del controller a la vista 
-       $this->view->showtask = $taskJsonModel->listAllTask();
+        //    if ($option == 'changestatus'){
+        //         $id = $_GET['idTarea'];
+        //         $user = $this->getTask($id);
+        //         $taskJsonModel = new TaskJsonModel();       
+        //         $allUsers = $taskJsonModel->listAllTask();
+        //         $taskJsonModel->changeStatusTask($allUsers, $user);
+        //     }
+        }
+        // Pasamos los parametros del controller a la vista 
+        $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
     public function changeStateTaskAction() {
