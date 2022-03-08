@@ -91,6 +91,13 @@ class TaskController extends ApplicationController
                     $allUsers = $taskJsonModel->listAllTask();
                     $taskJsonModel->updateTask($allUsers, $user);                    
                     break;
+                case "delete":
+                    echo "Delete task action";
+                    $user = $this->getTask($id);
+                    $taskJsonModel = new TaskJsonModel(); 
+                    $allUsers = $taskJsonModel->listAllTask();
+                    $taskJsonModel->deleteTask($allUsers, $user); 
+                    break;
                 default:
                     echo "Este valor no corresponde a ninguna acción";
             }

@@ -20,9 +20,8 @@ class TaskJsonModel{
         return json_decode($tareas_json, true);         
     }
 
-    public function deleteTask($task){
-        $this->task = $task;
-        echo 'Eliminar tarea' . $this->task;
+    public function deleteTask($allUsers, $user){
+        echo '<br>ELIMINAR TAREA' . '<br>';
     }
 
     public function updateTask($allUsers, $user){
