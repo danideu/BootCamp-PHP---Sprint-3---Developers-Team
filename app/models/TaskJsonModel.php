@@ -27,8 +27,26 @@ class TaskJsonModel{
 
     public function updateTask($task){
         $this->task = $task;
-        var_dump($this->task);
-        echo 'Actualziar tarea' . $this->task;
+        echo 'Actualziar tarea' . '<br>';
+        // var_dump($this->task);
+
+        //Recuperamos la tarea correspondiente
+    }
+
+    public function changeStatusTask($user){
+        echo 'Cambiar estado tarea' . '<br>';
+        $this->user = $user;
+        echo '<h1>USUARIO: </h1>' . $this->user . '<br>';
+        $estado = $this->user['estado'];
+        echo "ESTADO: " . $this->user['estado'];
+        if ($estado == 'pendiente'){
+            $estado = 'completado';
+        }
+        
+
+        // file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($user));    
+        echo "ESTADO: " . $this->user['estado'];
+        var_dump($user);
     }
 
     public function completeTask($task){
