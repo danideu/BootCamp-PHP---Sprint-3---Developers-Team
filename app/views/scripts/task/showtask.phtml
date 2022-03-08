@@ -42,7 +42,10 @@ include(ROOT_PATH . '/app/views/header.php');
                       </div>
                   </td>
                   <td class="px-4 py-3">
-                    <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-lime-300 bg-lime-600 dark:text-white dark:bg-purple-600"><?= $value['estado'] ?> </span>
+                    <?php
+                    $value['estado']=='pendiente' ? $colorStatus='red' : $colorStatus='lime';
+                    ?>
+                    <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-<?=$colorStatus?>-300 bg-<?=$colorStatus?>-600 dark:text-white dark:bg-purple-600"><?= $value['estado'] ?> </span>
                   </td>
                   <td class="px-4 py-3"><span class="text-sm"><?= $value['fec_creacion'] ?> </span></td>
                   <td class="px-4 py-3">

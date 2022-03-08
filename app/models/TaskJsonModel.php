@@ -33,20 +33,21 @@ class TaskJsonModel{
         //Recuperamos la tarea correspondiente
     }
 
-    public function changeStatusTask($user){
-        echo 'Cambiar estado tarea' . '<br>';
+    public function changeStatusTask($allUsers, $user){
+        
         $this->user = $user;
-        echo '<h1>USUARIO: </h1>' . $this->user . '<br>';
+        
         $estado = $this->user['estado'];
-        echo "ESTADO: " . $this->user['estado'];
+
         if ($estado == 'pendiente'){
             $estado = 'completado';
         }
-        
 
-        // file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($user));    
-        echo "ESTADO: " . $this->user['estado'];
-        var_dump($user);
+        $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
+
+        $allUsers[$key]['estado'] = $estado;
+
+        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
     }
 
     public function completeTask($task){

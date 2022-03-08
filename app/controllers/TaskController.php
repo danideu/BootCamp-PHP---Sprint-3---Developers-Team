@@ -32,8 +32,6 @@ class TaskController extends ApplicationController
         
         $taskJsonModel = new TaskJsonModel(); 
         $users = $taskJsonModel->listAllTask();
-        echo "ID: " . $id . "<br>"; 
-        var_dump($users);
         foreach ($users as $user){
             if ($user['idTareas'] == $id){
                 // var_dump($user);
@@ -54,12 +52,10 @@ class TaskController extends ApplicationController
     public function changestatus(){
         echo  __FILE__ . " ".  __FUNCTION__;
         $id = $_GET['idTarea'];
-        echo "ID: " . $id . "<br>"; 
         $user = $this->getTask($id);
-        $taskJsonModel = new TaskJsonModel();       
-        $taskJsonModel->changeStatusTask($user);
-        // $this->view->showtask = $taskJsonModel->changeStatusTask();
-        // $this->view->updatetask = $user;
+        $taskJsonModel = new TaskJsonModel();     
+        $allUsers = $taskJsonModel->listAllTask();  
+        $taskJsonModel->changeStatusTask($allUsers, $user);
     }
 
     public function showTaskAction() {      
@@ -70,12 +66,11 @@ class TaskController extends ApplicationController
        if (isset($_GET['op'])){ 
            $option = $_GET['op'];
            if ($option == 'changestatus'){
-                echo "<p style=color:red>CHANGESTATUS</p>";
                 $id = $_GET['idTarea'];
-                echo "ID: " . $id . "<br>"; 
                 $user = $this->getTask($id);
                 $taskJsonModel = new TaskJsonModel();       
-                $taskJsonModel->changeStatusTask($user);
+                $allUsers = $taskJsonModel->listAllTask();
+                $taskJsonModel->changeStatusTask($allUsers, $user);
             }
        }
        // Pasamos los parametros del controller a la vista 
