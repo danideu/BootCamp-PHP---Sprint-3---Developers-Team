@@ -3,6 +3,16 @@ body{
     font-family: Circular-Loom;
 }
 
+.w10per {
+  width: 10%;
+}
+.w17per {
+  width: 17%;
+}
+.w40per {
+  width: 40%;
+}
+
 @font-face {
     font-weight: 400;
     font-style:  normal;

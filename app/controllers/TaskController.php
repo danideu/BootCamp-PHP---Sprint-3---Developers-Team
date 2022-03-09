@@ -76,13 +76,13 @@ class TaskController extends ApplicationController
         
     }
 
-    public function changestatus(){
+    public function changestatus($status){
         echo  __FILE__ . " ".  __FUNCTION__;
         $id = $_GET['idTarea'];
         $user = $this->getTask($id);
         $taskJsonModel = new TaskJsonModel();     
         $allUsers = $taskJsonModel->listAllTask();  
-        $taskJsonModel->changeStatusTask($allUsers, $user);
+        $taskJsonModel->changeStatusTask($allUsers, $user, $status);
     }
 
     public function showTaskAction() {      
@@ -97,10 +97,11 @@ class TaskController extends ApplicationController
 
             switch ($option){
                 case "changestatus":
+                    $status = $_GET['status'];
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel();       
                     $allUsers = $taskJsonModel->listAllTask();
-                    $taskJsonModel->changeStatusTask($allUsers, $user);
+                    $taskJsonModel->changeStatusTask($allUsers, $user, $status);
                     break;
                 case "update":
                     $titulo = $_GET['titulo'];
@@ -130,14 +131,8 @@ class TaskController extends ApplicationController
                     break;
                 default:
                     echo "Este valor no corresponde a ninguna acción";
+                    break;
             }
-        //    if ($option == 'changestatus'){
-        //         $id = $_GET['idTarea'];
-        //         $user = $this->getTask($id);
-        //         $taskJsonModel = new TaskJsonModel();       
-        //         $allUsers = $taskJsonModel->listAllTask();
-        //         $taskJsonModel->changeStatusTask($allUsers, $user);
-        //     }
         }
         // Pasamos los parametros del controller a la vista 
         $this->view->showtask = $taskJsonModel->listAllTask();

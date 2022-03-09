@@ -124,19 +124,20 @@ class TaskJsonModel{
         file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
     }
 
-    public function changeStatusTask($allUsers, $user){
+    public function changeStatusTask($allUsers, $user, $status){
 
         $this->user = $user;
         
-        $estado = $this->user['estado'];
+        // $estado = $this->user['estado'];
 
-        if ($estado == 'pendiente'){
-            $estado = 'completado';
-        }
+        // if ($estado == 'pendiente'){
+        //     $estado = 'completado';
+        // }
+        $this->estado = $status;
 
         $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
 
-        $allUsers[$key]['estado'] = $estado;
+        $allUsers[$key]['estado'] = $this->estado;
 
         file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
     }
