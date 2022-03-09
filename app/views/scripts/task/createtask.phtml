@@ -7,20 +7,19 @@ include(ROOT_PATH . '/app/views/header.php');
     <div class="max-w-2xl w-full space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="./images/galloList.png" alt="Workflow">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Listado de tareas</h2>
-  
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Listado de tareas</h2>  
       </div>
 
-      <form action="createtask" method="get">
+      <form action="createtask" method="post">
         <div class="border-gray-300 rounded-md">
           <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg "><span>Título</span>
             <div class="newtask bg-white px-4 py-3 mt-2">
-            <input class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="text" placeholder="Por ejemplo: Error 001-2020"/>
+            <input name='titulo' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="text" placeholder="Por ejemplo: Error 001-2020"/>
             </div>
 
           <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg "><span>Descripción</span>
           <div class="newtask bg-white px-4 py-3 mt-2">
-              <textarea class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" rows="3" placeholder="Por ejemplo: Error 001-2020 - Solucionar error en formulario de contacto"></textarea></label>
+              <textarea name='descripcion' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" rows="3" placeholder="Por ejemplo: Error 001-2020 - Solucionar error en formulario de contacto"></textarea></label>
           </div>
         </div>
 
@@ -28,11 +27,12 @@ include(ROOT_PATH . '/app/views/header.php');
           <button onclick="window.location.href='showtask'" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-pink-500/50 text-sm font-medium rounded-md text-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Cancelar
           </button>
-          <button onclick="window.location.href='createtask'" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button onclick="window.location.href='showtask'" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Añadir Tarea
           </button>
-        </div>
-      </form>
+        </div>        
+      </form>   
+
     </div>
   </div>
 <!-- FIN - Codigo HTML -->

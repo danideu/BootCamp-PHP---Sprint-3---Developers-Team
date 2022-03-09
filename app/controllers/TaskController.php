@@ -14,20 +14,41 @@ class TaskController extends ApplicationController
 		echo "hello from test::check";
 	}
 
-    public function createTaskAction() {
-       echo  __FILE__ . " ".  __FUNCTION__;
-       $taskJsonModel = new TaskJsonModel();     
-       $taskJsonModel->createTask();  
+    public function createTaskAction() {       
 
-        /*
-        * Recoger los valores de los campos
-        * Validar la información contra bd o js
-        * llamar al modelo para guardar los datos del form
-        */
+        if (isset($_POST['titulo']) || isset($_POST['descripcion'])) {
+            // Recoger los valores de los campos
+            $titulo = $_POST['titulo'];
+            $descripcion = $_POST['descripcion'];
+
+            // Validar la información contra bd o js
+            $task = new stdClass();               
+            //@TODO Cambiar por una clase Util     
+            $taskJsonModel = new TaskJsonModel(); 
+            $task->idTareas = $taskJsonModel->generateUuid();
+            $task->titulo = $titulo;
+            $task->descripcion = $descripcion;
+            $task->estado = TaskJsonModel::ESTADO_PDTE;            
+            $task->fec_creacion = $taskJsonModel->getDateFormat();
+            $task->fec_modif = "";
+            $task->fec_fintarea = "";
+
+            // Guardamos la task
+            $taskJsonModel->saveTask($task);     
+        }
     }
-
-    public function deleteTaskAction() {
-        echo  __FILE__ . " ".  __FUNCTION__;
+    
+    public function deleteTaskAction($idTask) {
+        // Obtenemos el objeto task
+        $task = $this->getTask($idTask);
+        
+        // Eliminamos la task seleccionada
+        $taskJsonModel = new TaskJsonModel();
+        $users = $taskJsonModel->listAllTask();
+        $taskJsonModel->deleteTask($users, $task);
+        
+        // Refrescamos la lista
+        $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
     public function getTask($id){
@@ -94,12 +115,18 @@ class TaskController extends ApplicationController
                     $allUsers = $taskJsonModel->listAllTask();
                     $taskJsonModel->updateTask($allUsers, $user);                    
                     break;
+                // case "delete":
+                //     // echo "Delete task action";
+                //     $user = $this->getTask($id);
+                //     $taskJsonModel = new TaskJsonModel(); 
+                //     $allUsers = $taskJsonModel->listAllTask();
+                //     $taskJsonModel->deleteTask($allUsers, $user); 
+                //     break;
+                case "create":
+                    $this->createTaskAction();
+                    break;     
                 case "delete":
-                    // echo "Delete task action";
-                    $user = $this->getTask($id);
-                    $taskJsonModel = new TaskJsonModel(); 
-                    $allUsers = $taskJsonModel->listAllTask();
-                    $taskJsonModel->deleteTask($allUsers, $user); 
+                    $this->deleteTaskAction($id);
                     break;
                 default:
                     echo "Este valor no corresponde a ninguna acción";
@@ -120,4 +147,26 @@ class TaskController extends ApplicationController
         echo  __FILE__ . " ".  __FUNCTION__;
     }
 
+    // public function getTask($id){
+    //     $taskJsonModel = new TaskJsonModel(); 
+    //     $users = $taskJsonModel->listAllTask();
+
+    //     /*echo "ID: " . $id . "<br>"; 
+    //     echo '<pre>';
+    //     print_r($users);
+    //     echo '</pre>';*/
+
+    //     foreach ($users as $user){
+    //         if ($user['idTareas'] == $id){
+    //             /*echo '<pre>';
+    //             print_r($user);
+    //             echo '</pre>';*/
+    //             return $user;
+    //         }
+    //     }
+    //     return null;
+    // }
 }
+
+?>
+

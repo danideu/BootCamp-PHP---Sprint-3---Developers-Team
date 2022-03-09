@@ -1,16 +1,72 @@
 <?php
 
+//include ('Ramsey\Uuid');
+
 class TaskJsonModel{
     private $json = "todo.json";
-    //private $tareas_json = null;
+    //private $tareas_json = null;    
+    public const ESTADO_PDTE = 'Pendiente';
+    public const ESTADO_COMP = 'Completado';
 
     public function __construct()
     {  
     }
+   
+    private function openFile(): string
+    {
+        return file_get_contents(ROOT_PATH . "/lib/db/json/todoTask.json", true);                   
+    }
 
-    public function saveTask($task): void{
-        echo 'Crear tarea';
-        var_dump($task);        
+    private function saveFile($data): void
+    {
+        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($data));  
+    }
+    
+    public function generateUuid()
+    {
+        // Generamos el ID de la task
+        //$uuid = Uuid::uuid4();
+        //return $uuid->toString();/
+        return 12345; 
+    }
+
+    public function getDateFormat()
+    {
+        $date = new DateTime('now');
+        return $date->format('Y-m-d H:i:s');
+    }
+
+    public function saveTask($task): void{    
+        // Codificamos stdClass >> JSON
+       /* $taskJson = json_encode((array)$task);
+        echo 'NEW task JSON:';
+        print_r($taskJson);
+        echo '</pre>';*/
+        
+        // Abrimos nuestro fichero json        
+        $allTask = json_decode($this->openfile(), true);
+        /*echo 'ALL :';
+        echo '<pre>';
+        print_r($allTask);
+        echo '</pre>';
+
+        echo '******************* :';
+        echo '<pre>';
+        print_r(json_encode($allTask));
+        echo '</pre>';*/
+
+        // Añadimos la nueva task
+        array_push($allTask, $task);
+        
+        //$a=json_encode($allTask);
+        /*echo '******************* :';
+        echo '<pre>';
+        print_r($a);
+        echo '</pre>';*/
+
+
+        // Guardamos datos en fichero json        
+        $this->saveFile(json_encode($allTask));
     }
 
     public function listAllTask() {    
