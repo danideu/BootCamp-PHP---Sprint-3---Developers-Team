@@ -20,8 +20,32 @@ class TaskJsonModel{
         return json_decode($tareas_json, true);         
     }
 
+    public function createTask(){
+        echo '<br>CREAR TAREA' . '<br>';  
+        $this->titulo = $_GET['titulo'];
+        $this->descripcion = $_GET['descripcion'];
+        $this->estado = 'pendiente';
+
+        $this->nextid = rand(10000, 200000);
+        
+        // $newUser = [
+        //     {
+        //         "idTareas" => "nextid",
+        //         "titulo": "Subir a producción la tarea B01-001",
+        //         "descripcion": "Subir los cambios realizados en la tarea B01-001 a producción mediante Git",
+        //         "estado": "pendiente",
+        //         "fec_creacion": "2021-06-23 17:59:51",
+        //         "fec_modif": "2021-06-23 17:59:51",
+        //         "fec_fintarea": ""
+        //     }
+        // ];
+
+        // array_push($allUsers, $newUser);
+    }
+
     public function deleteTask($allUsers, $user){
-        echo '<br>ELIMINAR TAREA' . '<br>';
+        echo '<br>ELIMINAR TAREA' . '<br>';  
+        
     }
 
     public function updateTask($allUsers, $user){
@@ -30,12 +54,12 @@ class TaskJsonModel{
         $this->titulo = $_GET['titulo'];
         $this->descripcion = $_GET['descripcion'];
 
-        echo '<br>ACTUALIZAR TAREA' . '<br>';
-        echo '<br>Opción: ' . $this->op . '<br>';
-        echo '<br>Id: ' . $this->user['idTareas'] . '<br><br>';
+        // echo '<br>ACTUALIZAR TAREA' . '<br>';
+        // echo '<br>Opción: ' . $this->op . '<br>';
+        // echo '<br>Id: ' . $this->user['idTareas'] . '<br><br>';
 
-        echo '<br>Título: ' . $this->titulo . '<br>';
-        echo '<br>Título: ' . $this->descripcion . '<br>';
+        // echo '<br>Título: ' . $this->titulo . '<br>';
+        // echo '<br>Título: ' . $this->descripcion . '<br>';
 
         $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
         $allUsers[$key]['titulo'] = $this->titulo;

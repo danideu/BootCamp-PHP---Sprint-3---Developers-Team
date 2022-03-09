@@ -16,6 +16,9 @@ class TaskController extends ApplicationController
 
     public function createTaskAction() {
        echo  __FILE__ . " ".  __FUNCTION__;
+       $taskJsonModel = new TaskJsonModel();     
+       $taskJsonModel->createTask();  
+
         /*
         * Recoger los valores de los campos
         * Validar la información contra bd o js
@@ -28,7 +31,7 @@ class TaskController extends ApplicationController
     }
 
     public function getTask($id){
-        echo  __FILE__ . " ".  __FUNCTION__;
+        // echo  __FILE__ . " ".  __FUNCTION__;
         
         $taskJsonModel = new TaskJsonModel(); 
         $users = $taskJsonModel->listAllTask();
@@ -82,9 +85,9 @@ class TaskController extends ApplicationController
                     $titulo = $_GET['titulo'];
                     $descripcion = $_GET['descripcion'];
                     //Enviamos a la página del Listado
-                    echo '<h1>Actualizamos el registro</h1>';
-                    echo 'Título: ' . $titulo . '<br>';
-                    echo 'Descripción: ' . $descripcion . '<br>';
+                    // echo '<h1>Actualizamos el registro</h1>';
+                    // echo 'Título: ' . $titulo . '<br>';
+                    // echo 'Descripción: ' . $descripcion . '<br>';
                     //Actualizamos registro según los datos obtenidos
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel(); 
@@ -92,7 +95,7 @@ class TaskController extends ApplicationController
                     $taskJsonModel->updateTask($allUsers, $user);                    
                     break;
                 case "delete":
-                    echo "Delete task action";
+                    // echo "Delete task action";
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel(); 
                     $allUsers = $taskJsonModel->listAllTask();
