@@ -66,9 +66,6 @@ class TaskController extends ApplicationController
             $op = $_GET['op'];
             $id = $_GET['id'];
 
-            echo 'Operacion:'. $op . '<br>';
-            echo 'idTarea:'. $id . '<br>';
-
             switch($op) {
                 case 'create':
                     $this->createTaskAction();
@@ -88,16 +85,8 @@ class TaskController extends ApplicationController
         $taskJsonModel = new TaskJsonModel(); 
         $users = $taskJsonModel->listAllTask();
 
-        /*echo "ID: " . $id . "<br>"; 
-        echo '<pre>';
-        print_r($users);
-        echo '</pre>';*/
-
         foreach ($users as $user){
             if ($user['idTareas'] == $id){
-                /*echo '<pre>';
-                print_r($user);
-                echo '</pre>';*/
                 return $user;
             }
         }

@@ -53,7 +53,7 @@ class TaskJsonModel{
         echo '******************* :';
         echo '<pre>';
         print_r(json_encode($allTask));
-        echo '</pre>';*/
+        echo '</pre>';
 
         // Añadimos la nueva task
         array_push($allTask, $task);
@@ -76,21 +76,10 @@ class TaskJsonModel{
         return json_decode($tareas_json, true);         
     }
 
-    public function deleteTask($task){  
-        
-        /*echo 'TASK:';
-        echo '<pre>';
-        print_r($task);
-        echo '</pre>';*/
-
+    public function deleteTask($task) {  
         // Abrimos nuestro fichero json        
         $allTask = json_decode($this->openfile(), true);
        
-        /*echo 'ALL :';
-        echo '<pre>';
-        print_r($allTask);
-        echo '</pre>';*/
-
         // Buscamos task
         foreach($allTask as $key=>$value) {
             if($value['idTareas'] == $task['idTareas']) {
@@ -98,11 +87,7 @@ class TaskJsonModel{
             }    
         }
 
-        // Guardamos datos en fichero json
-        /*echo 'SAVE:';
-        echo '<pre>';
-        print_r($allTask);
-        echo '</pre>';*/
+        // Guardamos datos en fichero json       
         $this->saveFile($allTask);
     }
 
