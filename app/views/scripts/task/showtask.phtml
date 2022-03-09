@@ -17,6 +17,7 @@ include(ROOT_PATH . '/app/views/header.php');
             <table class="w-full whitespace-no-wrap">
                 <thead class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <tr>
+                        <td class="px-4 py-3">Usuario</td>
                         <td class="px-4 py-3">Título</td>
                         <td class="px-4 py-3">Estado</td>
                         <td class="px-4 py-3">Fecha</td>
@@ -34,9 +35,12 @@ include(ROOT_PATH . '/app/views/header.php');
 ?>
                 <!-- Inicio - Task -->
                 <tr class="">
+                <td class="px-4 py-3">
+                    <p class="text-xs text-gray-600 dark:text-gray-400"><?= $value['usuario'] ?> </p>
+                  </td>
                   <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
-                          <div>
+                          <div>                              
                               <p class="font-semibold"><?= $value['titulo'] ?> </p>
                               <p class="text-xs text-gray-600 dark:text-gray-400"><?= $value['descripcion'] ?> </p>
                           </div>

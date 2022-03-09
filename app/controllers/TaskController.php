@@ -15,24 +15,27 @@ class TaskController extends ApplicationController
 	}
 
     public function createTaskAction() {       
-
-        if (isset($_POST['titulo']) || isset($_POST['descripcion'])) {
+        if (isset($_POST['task']) || isset($_POST['user'])) {
             // Recoger los valores de los campos
-            $titulo = $_POST['titulo'];
-            $descripcion = $_POST['descripcion'];
+            $taskTitle = $_POST['task'];
+            $description = $_POST['description'];
+            $user = $_POST['user'];
+            $dateStart = $_POST['dateStart'];
+            $dateEnd = $_POST['dateEnd'];
 
             // Validar la información contra bd o js
             $task = new stdClass();               
             //@TODO Cambiar por una clase Util     
             $taskJsonModel = new TaskJsonModel(); 
             $task->idTareas = $taskJsonModel->generateUuid();
-            $task->titulo = $titulo;
-            $task->descripcion = $descripcion;
+            $task->usuario = $user;
+            $task->titulo = $taskTitle;
+            $task->descripcion = $description;
             $task->estado = TaskJsonModel::ESTADO_PDTE;            
-            $task->fec_creacion = $taskJsonModel->getDateFormat();
+            $task->fec_creacion = $taskJsonModel->getDateFormat($dateStart);
             $task->fec_modif = "";
-            $task->fec_fintarea = "";
-
+            $task->fec_fintarea = $taskJsonModel->getDateFormat($dateEnd);
+           
             // Guardamos la task
             $taskJsonModel->saveTask($task);     
         }

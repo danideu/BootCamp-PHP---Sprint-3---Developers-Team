@@ -12,16 +12,36 @@ include(ROOT_PATH . '/app/views/header.php');
 
       <form action="createtask" method="post">
         <div class="border-gray-300 rounded-md">
-          <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg "><span>Título</span>
-            <div class="newtask bg-white px-4 py-3 mt-2">
-            <input name='titulo' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="text" placeholder="Por ejemplo: Error 001-2020"/>
-            </div>
 
+          <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg"><span>Usuario</span>
+            <div class="newtask bg-white px-4 py-3 mt-2">
+                <input name='user' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="text" placeholder="María Perez"/>
+            </div>
+          </label>          
+          <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg"><span>Fecha inicio</span>
+            <div class="newtask bg-white px-4 py-3 mt-2">
+                <input name='dateStart' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="date"/>
+            </div>
+          </label>
+          <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg"><span>Fecha fin</span>
+            <div class="newtask bg-white px-4 py-3 mt-2">
+                <input name='dateEnd' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="date"/>
+            </div>
+          </label>
+          <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg"><span>Título</span>
+            <div class="newtask bg-white px-4 py-3 mt-2">
+                <input name='task' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" type="text" placeholder="Error 001-2020"/>
+            </div>
+          </label>
           <label class="block text-gray-700 dark:text-gray-400 mt-4 mb-4 text-lg "><span>Descripción</span>
-          <div class="newtask bg-white px-4 py-3 mt-2">
-              <textarea name='descripcion' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" rows="3" placeholder="Por ejemplo: Error 001-2020 - Solucionar error en formulario de contacto"></textarea></label>
-          </div>
+            <div class="newtask bg-white px-4 py-3 mt-2">
+                <textarea name='description' class="block w-full text-sm dark:text-gray-300 form-textarea focus:outline-none focus:border-purple-400 dark:border-gray-600 dark:focus:border-gray-600 dark:bg-gray-700 dark:focus:shadow-outline-gray focus:shadow-outline-purple mt-1" rows="3" placeholder="Error 001-2020 - Solucionar error en formulario de contacto">                
+                </textarea>
+            </div>
+          </label>
+          
         </div>
+      </form>   
 
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
           <button onclick="window.location.href='showtask'" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-pink-500/50 text-sm font-medium rounded-md text-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -31,8 +51,8 @@ include(ROOT_PATH . '/app/views/header.php');
             Añadir Tarea
           </button>
         </div>        
-      </form>   
-
+      
+      
     </div>
   </div>
 <!-- FIN - Codigo HTML -->

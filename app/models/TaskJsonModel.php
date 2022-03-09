@@ -30,40 +30,30 @@ class TaskJsonModel{
         return 12345; 
     }
 
-    public function getDateFormat()
+    public function getDateFormat($date)
     {
-        $date = new DateTime('now');
+        $date = new DateTime($date);
         return $date->format('Y-m-d H:i:s');
     }
 
     public function saveTask($task): void{    
         // Codificamos stdClass >> JSON
-       /* $taskJson = json_encode((array)$task);
-        echo 'NEW task JSON:';
-        print_r($taskJson);
-        echo '</pre>';*/
+        //$taskJson = json_encode((array)$task);
+        //$aux = (array) $task; // ó get_object_vars($task);
         
         // Abrimos nuestro fichero json        
         $allTask = json_decode($this->openfile(), true);
-        /*echo 'ALL :';
+
+        // Añadimos la nueva task
+        array_push($allTask, get_object_vars($task));
+        
         echo '<pre>';
         print_r($allTask);
         echo '</pre>';
 
-        echo '******************* :';
-        echo '<pre>';
+        echo '****************************<pre>';
         print_r(json_encode($allTask));
         echo '</pre>';
-
-        // Añadimos la nueva task
-        array_push($allTask, $task);
-        
-        //$a=json_encode($allTask);
-        /*echo '******************* :';
-        echo '<pre>';
-        print_r($a);
-        echo '</pre>';*/
-
 
         // Guardamos datos en fichero json        
         $this->saveFile(json_encode($allTask));
