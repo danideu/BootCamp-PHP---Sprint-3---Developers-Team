@@ -37,23 +37,18 @@ class TaskJsonModel{
     }
 
     public function saveTask($task): void{    
-        // Codificamos stdClass >> JSON
-        //$taskJson = json_encode((array)$task);
-        //$aux = (array) $task; // ó get_object_vars($task);
-        
         // Abrimos nuestro fichero json        
         $allTask = json_decode($this->openfile(), true);
 
         // Añadimos la nueva task
         array_push($allTask, get_object_vars($task));
         
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($allTask);
         echo '</pre>';
-
         echo '****************************<pre>';
         print_r(json_encode($allTask));
-        echo '</pre>';
+        echo '</pre>';*/
 
         // Guardamos datos en fichero json        
         $this->saveFile(json_encode($allTask));

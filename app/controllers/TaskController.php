@@ -38,6 +38,9 @@ class TaskController extends ApplicationController
            
             // Guardamos la task
             $taskJsonModel->saveTask($task);     
+
+            // Refrescamos la lista
+            $this->view->showtask = $taskJsonModel->listAllTask();
         }
     }
     
