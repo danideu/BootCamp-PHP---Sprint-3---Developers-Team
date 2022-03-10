@@ -15,6 +15,8 @@ class TaskController extends ApplicationController
 	}
 
     public function createTaskAction() {       
+        echo  __FILE__ . " ".  __FUNCTION__;
+        
         if (isset($_POST['task']) || isset($_POST['user'])) {
             // Recoger los valores de los campos
             $taskTitle = $_POST['task'];

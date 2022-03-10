@@ -37,8 +37,8 @@ class TaskJsonModel{
     }
 
     public function saveTask($task): void{    
-        // Abrimos nuestro fichero json        
-        $allTask = json_decode($this->openfile(), true);
+        // Obtenemos la lista de tareas
+        $allTask = $this->listAllTask();
 
         // Añadimos la nueva task
         array_push($allTask, get_object_vars($task));
@@ -51,20 +51,20 @@ class TaskJsonModel{
         echo '</pre>';*/
 
         // Guardamos datos en fichero json        
-        $this->saveFile(json_encode($allTask));
+        $this->saveFile($allTask);
     }
 
     public function listAllTask() {    
         // Abrimos nuestro fichero json        
-        $tareas_json = file_get_contents(ROOT_PATH . "/lib/db/json/todoTask.json", true);                   
+        $tareas_json = $this->openfile();                   
         // Decodificamos el json
-        return json_decode($tareas_json, true);         
+        return  json_decode($tareas_json, true);         
     }
 
     public function deleteTask($task) {  
-        // Abrimos nuestro fichero json        
-        $allTask = json_decode($this->openfile(), true);
-       
+        // Obtenemos la lista de tareas
+        $allTask = $this->listAllTask(); 
+
         // Buscamos task
         foreach($allTask as $key=>$value) {
             if($value['idTareas'] == $task['idTareas']) {
@@ -72,8 +72,11 @@ class TaskJsonModel{
             }    
         }
 
+        // Reorganizamos los indices del array
+        $allTaskAux=array_values($allTask);
+        
         // Guardamos datos en fichero json       
-        $this->saveFile($allTask);
+        $this->saveFile($allTaskAux);
     }
 
     public function updateTask($task){
