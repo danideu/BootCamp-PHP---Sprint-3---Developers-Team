@@ -1,6 +1,7 @@
 <?php
 
-//include ('Ramsey\Uuid');
+//use Ramsey\Uuid\Uuid;
+//require_once (ROOT_PATH . '/vendor/Ramsey/Uuid/Uuid');
 
 class TaskJsonModel{
     private $json = "todo.json";
@@ -24,10 +25,9 @@ class TaskJsonModel{
     
     public function generateUuid()
     {
-        // Generamos el ID de la task
-        //$uuid = Uuid::uuid4();
-        //return $uuid->toString();/
-        return 12345; 
+        // Generamos el ID de la task             
+        //return \Ramsey\Uuid\Uuid::uuid4()->toString(); 
+        return rand(8,15); 
     }
 
     public function getDateFormat($date)
@@ -42,13 +42,6 @@ class TaskJsonModel{
 
         // Añadimos la nueva task
         array_push($allTask, get_object_vars($task));
-        
-        /*echo '<pre>';
-        print_r($allTask);
-        echo '</pre>';
-        echo '****************************<pre>';
-        print_r(json_encode($allTask));
-        echo '</pre>';*/
 
         // Guardamos datos en fichero json        
         $this->saveFile($allTask);
