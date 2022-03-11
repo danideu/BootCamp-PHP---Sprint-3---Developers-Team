@@ -4,8 +4,6 @@
 //require_once (ROOT_PATH . '/vendor/Ramsey/Uuid/Uuid');
 
 class TaskJsonModel{
-    private $json = "todo.json";
-    //private $tareas_json = null;    
     public const ESTADO_PDTE = 'Pendiente';
     public const ESTADO_COMP = 'Completado';
 
@@ -27,7 +25,7 @@ class TaskJsonModel{
     {
         // Generamos el ID de la task             
         //return \Ramsey\Uuid\Uuid::uuid4()->toString(); 
-        return rand(8,15); 
+        return rand(1,50);
     }
 
     public function getDateFormat($date)

@@ -10,7 +10,6 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/task' => 'task#index',
 	'/createtask' => 'task#createTask',
 	'/updatetask' => 'task#updateTask',
 	'/showtask' => 'task#showTask'
