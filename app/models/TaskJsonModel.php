@@ -70,27 +70,7 @@ class TaskJsonModel{
         
         // Guardamos datos en fichero json       
         $this->saveFile($allTaskAux);
-    }
-
-    public function updateTask($task){
-        $this->task = $task;
-        echo 'Actualziar tarea' . $this->task;
-    }
-
-    public function completeTask($task){
-        $this->task = $task;
-        echo 'Completar tarea' . $this->task;
-    }
-
-    public function fetchOne($id)
-    {
-        $sql = 'select * from ' . $this->_table;
-        $sql .= ' where id = ?';
-
-        $statement = $this->_dbh->prepare($sql);
-        $statement->execute(array($id));
-
-        return $statement->fetch(PDO::FETCH_OBJ);
-    }
+    }   
 }
+
 ?>
