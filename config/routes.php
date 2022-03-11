@@ -11,6 +11,4 @@
  */
 $routes = array(
 	'/test' => 'test#index',
-	'/login' => 'login#index',
-	'/alllist' => 'alllist#index'
 );
