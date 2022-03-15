@@ -1,48 +1,40 @@
 <?php
-
 /**
  * A base model for handling the database connections
  */
 class Model
 {
-	protected $_dbh = null;
-	protected $_table = "";
-	
+	private $json = "todo.json";
+	private $tareas_json = null;
+
 	public function __construct()
 	{
-		// parses the settings file
-		$settings = parse_ini_file(ROOT_PATH . '/config/settings.ini', true);
-		
-		// starts the connection to the database
-		$this->_dbh = new PDO(
-			sprintf(
-				"%s:host=%s;dbname=%s",
-				$settings['database']['driver'],
-				$settings['database']['host'],
-				$settings['database']['dbname']
-			),
-			$settings['database']['user'],
-			$settings['database']['password'],
-			array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-		);
-		
-		$this->init();
+		// $uri = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$this->tareas_json = json_decode(file_get_contents("http://localhost:8899/cursos/barcelonaactiva/sprint3/to-do/web/javascripts/todo.json", true), true);
+		$this->listAllTask($this->tareas_json);
 	}
 	
-	public function init()
-	{
-		
+	public function listAllTask($json){
+		echo 'Listar todas las tarea';
+		var_dump($json);
+		return($json);
 	}
-	
-	/**
-	 * Sets the database table the model is using
-	 * @param string $table the table the model is using
-	 */
-	protected function _setTable($table)
-	{
-		$this->_table = $table;
+
+	public function deleteTask($task){
+		$this->task = $task;
+		echo 'Eliminar tarea' . $this->task;
 	}
-	
+
+	public function updateTask($task){
+		$this->task = $task;
+		echo 'Actualziar tarea' . $this->task;
+	}
+
+	public function completeTask($task){
+		$this->task = $task;
+		echo 'Completar tarea' . $this->task;
+	}
+
 	public function fetchOne($id)
 	{
 		$sql = 'select * from ' . $this->_table;

@@ -1,8 +1,5 @@
 <?php
 
-//use Ramsey\Uuid\Uuid;
-//require_once (ROOT_PATH . '/vendor/Ramsey/Uuid/Uuid');
-
 class TaskJsonModel{
     public const ESTADO_PDTE = 'Pendiente';
     public const ESTADO_COMP = 'Completado';
@@ -23,8 +20,6 @@ class TaskJsonModel{
     
     public function generateUuid()
     {
-        // Generamos el ID de la task             
-        //return \Ramsey\Uuid\Uuid::uuid4()->toString(); 
         return rand(1,50);
     }
 
@@ -47,14 +42,14 @@ class TaskJsonModel{
 
     public function listAllTask() {    
         // Abrimos nuestro fichero json        
-        $tareas_json = $this->openfile();                   
+        $tareas_json = $this->openfile();
         // Decodificamos el json
-        return  json_decode($tareas_json, true);         
+        return  json_decode($tareas_json, true);
     }
 
-    public function deleteTask($task) {  
+    public function deleteTask($task) {
         // Obtenemos la lista de tareas
-        $allTask = $this->listAllTask(); 
+        $allTask = $this->listAllTask();
 
         // Buscamos task
         foreach($allTask as $key=>$value) {
@@ -65,10 +60,42 @@ class TaskJsonModel{
 
         // Reorganizamos los indices del array
         $allTaskAux=array_values($allTask);
-        
-        // Guardamos datos en fichero json       
+
+        // Guardamos datos en fichero json
         $this->saveFile($allTaskAux);
-    }   
+    }
+
+    public function updateTask($allUsers, $user){
+        $this->op = $_GET['op'];
+        $this->user = $user;
+        $this->titulo = $_GET['titulo'];
+        $this->descripcion = $_GET['descripcion'];
+
+        $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
+        $allUsers[$key]['titulo'] = $this->titulo;
+        $allUsers[$key]['descripcion'] = $this->descripcion;
+
+        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));
+    }
+
+    public function changeStatusTask($allUsers, $user, $status){
+
+        $this->user = $user;
+
+        $this->estado = $status;
+
+        $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
+
+        $allUsers[$key]['estado'] = $this->estado;
+
+        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));
+    }
+
+    public function completeTask($task){
+        $this->task = $task;
+        echo 'Completar tarea' . $this->task;
+    }
+
 }
 
 ?>
