@@ -68,14 +68,14 @@ class TaskController extends ApplicationController
 
     //Actualizar la tarea según los campos añadidos en el formulario
     public function updateTaskAction() {
-        $id = $_GET['idTarea'];
+        $id = $_GET['id'];
         $user = $this->getTask($id);
         $this->view->updatetask = $user;
     }
 
     public function changestatus($status){
         echo  __FILE__ . " ".  __FUNCTION__;
-        $id = $_GET['idTarea'];
+        $id = $_GET['id'];
         $user = $this->getTask($id);
         $taskJsonModel = new TaskJsonModel();     
         $allUsers = $taskJsonModel->listAllTask();  
@@ -90,7 +90,7 @@ class TaskController extends ApplicationController
        if (isset($_GET['op'])){ 
            
             $option = $_GET['op'];
-            $id = $_GET['idTarea'];
+            $id = $_GET['id'];
 
             switch ($option){
                 case "changestatus":
@@ -101,21 +101,12 @@ class TaskController extends ApplicationController
                     $taskJsonModel->changeStatusTask($allUsers, $user, $status);
                     break;
                 case "update":
-                    // $titulo = $_GET['titulo'];
-                    // $descripcion = $_GET['descripcion'];
                     //Actualizamos registro según los datos obtenidos
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel(); 
                     $allUsers = $taskJsonModel->listAllTask();
                     $taskJsonModel->updateTask($allUsers, $user);                    
                     break;
-                // case "delete":
-                //     // echo "Delete task action";
-                //     $user = $this->getTask($id);
-                //     $taskJsonModel = new TaskJsonModel(); 
-                //     $allUsers = $taskJsonModel->listAllTask();
-                //     $taskJsonModel->deleteTask($allUsers, $user); 
-                //     break;
                 case "create":
                     $this->createTaskAction();
                     break;     
@@ -132,28 +123,7 @@ class TaskController extends ApplicationController
     }
 
     public function changeStateTaskAction() {
-        echo  __FILE__ . " ".  __FUNCTION__;
     }
-
-    // public function getTask($id){
-    //     $taskJsonModel = new TaskJsonModel(); 
-    //     $users = $taskJsonModel->listAllTask();
-
-    //     /*echo "ID: " . $id . "<br>"; 
-    //     echo '<pre>';
-    //     print_r($users);
-    //     echo '</pre>';*/
-
-    //     foreach ($users as $user){
-    //         if ($user['idTareas'] == $id){
-    //             /*echo '<pre>';
-    //             print_r($user);
-    //             echo '</pre>';*/
-    //             return $user;
-    //         }
-    //     }
-    //     return null;
-    // }
 }
 
 ?>
