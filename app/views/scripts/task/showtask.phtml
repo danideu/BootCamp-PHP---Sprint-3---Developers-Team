@@ -7,7 +7,7 @@ include(ROOT_PATH . '/app/views/header.php');
     <div class="max-w-2xl w-full space-y-8">
       <div>
         <img class="mx-auto h-20 w-auto" src="./images/roosterTodo.png" alt="Workflow">
-        <h1 class="mt-6 text-center text-4xl font-extrabold text-red-600">Rooster ToDo</h1>          
+        <h1 class="mt-6 text-center text-4xl font-extrabold text-red-600">Rooster ToDo</h1>
       </div>
 
       <form action="showtask" method="get">
@@ -29,7 +29,7 @@ include(ROOT_PATH . '/app/views/header.php');
 <?php  
  //Recogemos el valor del controller accediendo al array data de la clase view
  $allTask = $this->_data['showtask'];
- 
+
  // Recorremos todas las tareas
  foreach($allTask as $task=>$value) {      
 ?>
@@ -48,20 +48,20 @@ include(ROOT_PATH . '/app/views/header.php');
                   </td>
                   <td class="px-4 py-3">
                     <?php
-                    switch ($value['estado']){
-                      case 'inprogress':
+                    switch ($value['estado'])
+                    {
+                      case 'En curso':
                         $colorStatus = 'amber';
                         break;
-                      case 'completado':
+                      case 'Completado':
                         $colorStatus = 'lime';
                         break;
-                      case 'pendiente':
+                      case 'Pendiente':
                         $colorStatus = 'red';
                         break;
                       default:
                         break;
                     }
-
                     ?>
                     <span class="inline-flex px-2 text-xs font-medium leading-5 rounded-full text-<?=$colorStatus?>-300 bg-<?=$colorStatus?>-600"><?= $value['estado'] ?> </span>
                   </td>
@@ -75,13 +75,13 @@ include(ROOT_PATH . '/app/views/header.php');
                     </a>
                   </td>
                   <td class="px-4 py-3 w17per">
-                  <a href="showtask?op=changestatus&estado=inprogress&id=<?= $value['idTareas'] ?>" style="display: inline-block">
+                  <a href="showtask?op=changestatus&estado=En curso&id=<?= $value['idTareas'] ?>" style="display: inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                       <path fill-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                     </svg>
                   </a>
-                    <a href="showtask?op=changestatus&estado=completado&id=<?= $value['idTareas'] ?>" style="display: inline-block">
+                    <a href="showtask?op=changestatus&estado=Completado&id=<?= $value['idTareas'] ?>" style="display: inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -95,7 +95,6 @@ include(ROOT_PATH . '/app/views/header.php');
               <!-- Fin - Task -->       
               
               <!-- Ini - Campos ocultos -->
-              <input type='hidden' name='op' value="delete">
               <input type='hidden' name='idTarea' value="<?= $value['idTareas'] ?>">
               <!-- Fin - Campos ocultos -->
               </tbody>

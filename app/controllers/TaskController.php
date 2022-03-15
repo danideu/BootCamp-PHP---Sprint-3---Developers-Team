@@ -1,12 +1,10 @@
 <?php
 
-
 class TaskController extends ApplicationController
 {    
 	public function indexAction()
 	{
 		$this->view->message = "hello from test::index";
-
 	}
 	
 	public function checkAction()
@@ -14,7 +12,8 @@ class TaskController extends ApplicationController
 		echo "hello from test::check";
 	}
 
-    public function createTaskAction() {       
+    public function createTaskAction()
+    {
         if (!empty($_POST['task']) || !empty($_POST['user'])) {
 
             // Recoger los valores de los campos
@@ -25,8 +24,7 @@ class TaskController extends ApplicationController
             $dateEnd = $_POST['dateEnd'];
 
             // Validar la información contra bd o js
-            $task = new stdClass();               
-            //@TODO Cambiar por una clase Util     
+            $task = new stdClass();
             $taskJsonModel = new TaskJsonModel(); 
             $task->idTareas = $taskJsonModel->generateUuid();
             $task->usuario = $user;
@@ -45,7 +43,8 @@ class TaskController extends ApplicationController
         }
     }
     
-    public function deleteTaskAction($idTask) {
+    public function deleteTaskAction($idTask)
+    {
         // Obtenemos el objeto task
         $task = $this->getTask($idTask);
         
@@ -57,14 +56,15 @@ class TaskController extends ApplicationController
         $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
-    public function updateTaskAction() {
+    public function updateTaskAction()
+    {
         $id = $_GET['id'];
         $user = $this->getTask($id);
         $this->view->updatetask = $user;
     }
 
-    public function changestatus($status){
-        echo  __FILE__ . " ".  __FUNCTION__;
+    public function changestatus($status)
+    {
         $id = $_GET['id'];
         $user = $this->getTask($id);
         $taskJsonModel = new TaskJsonModel();     
@@ -72,7 +72,8 @@ class TaskController extends ApplicationController
         $taskJsonModel->changeStatusTask($allUsers, $user, $status);
     }
 
-    public function showTaskAction() {      
+    public function showTaskAction()
+    {
        //Declaramos un objeto de tipo Model  
        $taskJsonModel = new TaskJsonModel();
 
@@ -112,12 +113,13 @@ class TaskController extends ApplicationController
         $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
-    public function getTask($id){
+    public function getTask($id)
+    {
         $taskJsonModel = new TaskJsonModel();
         $users = $taskJsonModel->listAllTask();
 
-        foreach ($users as $user){
-            if ($user['idTareas'] == $id){
+        foreach ($users as $user) {
+            if ($user['idTareas'] == $id) {
                 return $user;
             }
         }

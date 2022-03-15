@@ -3,6 +3,7 @@
 class TaskJsonModel{
     public const ESTADO_PDTE = 'Pendiente';
     public const ESTADO_COMP = 'Completado';
+    public const ESTADO_CURS = 'En curso';
 
     public function __construct()
     {  
@@ -29,7 +30,8 @@ class TaskJsonModel{
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function saveTask($task): void{    
+    public function saveTask($task): void
+    {
         // Obtenemos la lista de tareas
         $allTask = $this->listAllTask();
 
@@ -40,14 +42,16 @@ class TaskJsonModel{
         $this->saveFile($allTask);
     }
 
-    public function listAllTask() {    
+    public function listAllTask()
+    {
         // Abrimos nuestro fichero json        
         $tareas_json = $this->openfile();
         // Decodificamos el json
         return  json_decode($tareas_json, true);
     }
 
-    public function deleteTask($task) {
+    public function deleteTask($task)
+    {
         // Obtenemos la lista de tareas
         $allTask = $this->listAllTask();
 
@@ -65,7 +69,8 @@ class TaskJsonModel{
         $this->saveFile($allTaskAux);
     }
 
-    public function updateTask($allUsers, $user){
+    public function updateTask($allUsers, $user)
+    {
         $this->op = $_GET['op'];
         $this->user = $user;
         $this->titulo = $_GET['titulo'];
@@ -79,26 +84,18 @@ class TaskJsonModel{
         $allUsers[$key]['estado'] = $this->estado;
         $allUsers[$key]['fec_fintarea'] = $this->fec_fintarea;
 
-        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
+        $this->saveFile($allUsers);
     }
 
-    public function changeStatusTask($allUsers, $user, $status){
-
+    public function changeStatusTask($allUsers, $user, $status)
+    {
         $this->user = $user;
-
         $this->estado = $status;
 
         $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
-
         $allUsers[$key]['estado'] = $this->estado;
 
-        file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
-    }
-
-    public function completeTask($task){
-        $this->task = $task;
+        $this->saveFile($allUsers);
     }
 
 }
-
-?>
