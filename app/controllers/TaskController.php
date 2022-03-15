@@ -94,7 +94,7 @@ class TaskController extends ApplicationController
 
             switch ($option){
                 case "changestatus":
-                    $status = $_GET['status'];
+                    $status = $_GET['estado'];
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel();       
                     $allUsers = $taskJsonModel->listAllTask();
