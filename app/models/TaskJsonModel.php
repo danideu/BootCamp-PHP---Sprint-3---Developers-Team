@@ -109,6 +109,8 @@ class TaskJsonModel{
         $this->user = $user;
         $this->titulo = $_GET['titulo'];
         $this->descripcion = $_GET['descripcion'];
+        $this->estado = $_GET['estado'];
+        $this->fec_fintarea = $_GET['fec_fintarea'];
 
         // echo '<br>ACTUALIZAR TAREA' . '<br>';
         // echo '<br>Opción: ' . $this->op . '<br>';
@@ -120,6 +122,8 @@ class TaskJsonModel{
         $key  = array_search($user['idTareas'], array_column($allUsers, 'idTareas'));
         $allUsers[$key]['titulo'] = $this->titulo;
         $allUsers[$key]['descripcion'] = $this->descripcion;
+        $allUsers[$key]['estado'] = $this->estado;
+        $allUsers[$key]['fec_fintarea'] = $this->fec_fintarea;
 
         file_put_contents(ROOT_PATH . "/lib/db/json/todoTask.json", json_encode($allUsers));    
     }

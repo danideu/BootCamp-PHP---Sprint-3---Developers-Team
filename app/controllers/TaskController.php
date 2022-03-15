@@ -17,7 +17,7 @@ class TaskController extends ApplicationController
     public function createTaskAction() {       
 
         if (isset($_POST['titulo']) || isset($_POST['descripcion'])) {
-            // Recoger los valores de los campos
+            // Recoger los valores de los campos que vienen por POST
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
 
@@ -51,29 +51,26 @@ class TaskController extends ApplicationController
         $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
+    //Obtener una tarea a través de su ID.
     public function getTask($id){
-        // echo  __FILE__ . " ".  __FUNCTION__;
-        
+        //Obtenemos la lista de todos las tareas
         $taskJsonModel = new TaskJsonModel(); 
         $users = $taskJsonModel->listAllTask();
+        
+        //Buscamos la tarea concreta recorriendo todo el listado
         foreach ($users as $user){
             if ($user['idTareas'] == $id){
-                // var_dump($user);
                 return $user;
             }
         }
         return null;
     }
 
+    //Actualizar la tarea según los campos añadidos en el formulario
     public function updateTaskAction() {
-        echo  __FILE__ . " ".  __FUNCTION__;
-        echo "<br>UpdateTaskAction<br>";
         $id = $_GET['idTarea'];
         $user = $this->getTask($id);
-        // var_dump($user);
-        $this->view->updatetask = $user ;
-        // $action == 'update' ? 'Actualizamos el registro' : $this->view->updatetask = $user ;
-        
+        $this->view->updatetask = $user;
     }
 
     public function changestatus($status){
@@ -104,12 +101,8 @@ class TaskController extends ApplicationController
                     $taskJsonModel->changeStatusTask($allUsers, $user, $status);
                     break;
                 case "update":
-                    $titulo = $_GET['titulo'];
-                    $descripcion = $_GET['descripcion'];
-                    //Enviamos a la página del Listado
-                    // echo '<h1>Actualizamos el registro</h1>';
-                    // echo 'Título: ' . $titulo . '<br>';
-                    // echo 'Descripción: ' . $descripcion . '<br>';
+                    // $titulo = $_GET['titulo'];
+                    // $descripcion = $_GET['descripcion'];
                     //Actualizamos registro según los datos obtenidos
                     $user = $this->getTask($id);
                     $taskJsonModel = new TaskJsonModel(); 
