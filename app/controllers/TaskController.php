@@ -58,19 +58,17 @@ class TaskController extends ApplicationController
     }
 
     public function updateTaskAction() {
-        echo "<br>UpdateTaskAction<br>";
-        $id = $_GET['idTarea'];
+        $id = $_GET['id'];
         $user = $this->getTask($id);
-        // var_dump($user);
-        $this->view->updatetask = $user ;
-        // $action == 'update' ? 'Actualizamos el registro' : $this->view->updatetask = $user ;
+        $this->view->updatetask = $user;
     }
 
     public function changestatus($status){
-        $id = $_GET['idTarea'];
+        echo  __FILE__ . " ".  __FUNCTION__;
+        $id = $_GET['id'];
         $user = $this->getTask($id);
-        $taskJsonModel = new TaskJsonModel();
-        $allUsers = $taskJsonModel->listAllTask();
+        $taskJsonModel = new TaskJsonModel();     
+        $allUsers = $taskJsonModel->listAllTask();  
         $taskJsonModel->changeStatusTask($allUsers, $user, $status);
     }
 
@@ -78,30 +76,29 @@ class TaskController extends ApplicationController
        //Declaramos un objeto de tipo Model  
        $taskJsonModel = new TaskJsonModel();
 
-       // En función de la operación a realizar, llamamos al método correspondiente
-       if (isset($_GET['op'])) {
-            $op = $_GET['op'];
-            $id = $_GET['id']; //  $id = $_GET['id'];
+       //Chequeamos si es cambio de estado
+       if (isset($_GET['op'])){ 
+           
+            $option = $_GET['op'];
+            $id = $_GET['id'];
 
-            switch($op) {
+            switch ($option){
                 case 'create':
                     $this->createTaskAction();
                     break;
                 case "changestatus":
-                    $status = $_GET['status'];
+                    $status = $_GET['estado'];
                     $user = $this->getTask($id);
-                    $taskJsonModel = new TaskJsonModel();
+                    $taskJsonModel = new TaskJsonModel();       
                     $allUsers = $taskJsonModel->listAllTask();
                     $taskJsonModel->changeStatusTask($allUsers, $user, $status);
                     break;
                 case "update":
-                    $titulo = $_GET['titulo'];
-                    $descripcion = $_GET['descripcion'];
                     //Actualizamos registro según los datos obtenidos
                     $user = $this->getTask($id);
-                    $taskJsonModel = new TaskJsonModel();
+                    $taskJsonModel = new TaskJsonModel(); 
                     $allUsers = $taskJsonModel->listAllTask();
-                    $taskJsonModel->updateTask($allUsers, $user);
+                    $taskJsonModel->updateTask($allUsers, $user);                    
                     break;
                 case 'delete':
                       $this->deleteTaskAction($id);
@@ -111,12 +108,12 @@ class TaskController extends ApplicationController
                     break;
             }
         }
-        // Pasamos los parametros del controller a la vista
+        // Pasamos los parametros del controller a la vista 
         $this->view->showtask = $taskJsonModel->listAllTask();
     }
 
     public function getTask($id){
-        $taskJsonModel = new TaskJsonModel(); 
+        $taskJsonModel = new TaskJsonModel();
         $users = $taskJsonModel->listAllTask();
 
         foreach ($users as $user){
